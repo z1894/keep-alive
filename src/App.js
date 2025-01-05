@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import Home from "./views/Home";
+import Form from "./views/Form";
+
+import Alive from "./Alive";
+import Transfer from "./Alive/Transfer";
+
 
 function App() {
+  // debugger;
+  console.log("App ..");
+
+  const AliveHome = Transfer(Home, 'home');
+  const AliveForm = Transfer(Form, 'form');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Alive>
+        <div>
+          <ul>
+            <li><Link to={'/'}>Home</Link></li>
+            <li><Link to={'/form'}>Form</Link></li>
+          </ul>
+
+          <div>
+            <Routes>
+
+              <Route path="/" element={<AliveHome />} />
+              <Route path="/form" element={<AliveForm />} />
+            </Routes>
+          </div>
+
+        </div>
+      </Alive>
+    </BrowserRouter>
+
   );
 }
 
